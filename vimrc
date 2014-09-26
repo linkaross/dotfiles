@@ -25,3 +25,21 @@ syntax on
 filetype plugin on
 filetype indent on
 
+"
+"" Search
+"
+set incsearch
+set hlsearch
+"
+""
+" Statusline
+" "
+set laststatus=2
+set statusline=%<%f\ %(\ [%M%R%H%Y]%)%=%-14.(%l,%c%V%)\ %P
+"
+" "
+" " Autoreload
+" "
+autocmd! bufwritepost .vimrc source %
+"
+let g:syntastic_puppet_puppetlint_args = '--no-80chars-check'
