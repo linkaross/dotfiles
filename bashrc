@@ -107,6 +107,5 @@ function mkdircd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
 
 function whichl() { ls -l `which $1`; }
 
-parse_git_branch () { git name-rev HEAD 2> /dev/null | sed 's#HEAD\ \(.*\)# 
-(git::\1)#' }
+parse_git_branch () { git name-rev HEAD 2> /dev/null | sed 's#HEAD\ \(.*\)# (git::\1)#'; }
 
