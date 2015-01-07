@@ -10,7 +10,7 @@
 # todo: ps1 chroot, moar fancy git prompt
 [[ $- != *i* ]] && return
 alias ls='ls --color=auto'
-PS1='`if [ $? = 0 ]; then echo "\[\033[01;32m\]:) ?$?"; else echo "\[\033[01;31m\]:( ?$?"; fi`\[\e[0m\] \[\e[00;32m\]n!\! \[\e[0m\]\[\e[00;33m\]@\t \[\e[0m\]\[\e[00;37m\]`parse_git_branch; `\n\[\e[0m\]\[\e[01;33m\]\u\[\e[0m\]\[\e[00;32m\]{\[\e[0m\]\[\e[00;36m\]\j\[\e[0m\]\[\e[00;32m\]}\[\e[0m\]\[\e[00;31m\]\h\[\e[0m\]\[\e[00;32m\][\[\e[0m\]\[\e[00;35m\]\w\[\e[0m\]\[\e[00;32m\]]\$\[\e[0m\]\[\e[00;37m\] \[\e[0m\]'
+PS1='`if [ $? = 0 ]; then echo "\[\033[01;32m\]:) ?$?"; else echo "\[\033[01;31m\]:( ?$?"; fi`\[\e[0m\] \[\e[00;32m\]n!\! \[\e[0m\]\[\e[00;33m\]@\t \[\e[0m\]\[\e[00;37m\]` parse_git_branch `\n\[\e[0m\]\[\e[01;33m\]\u\[\e[0m\]\[\e[00;32m\]{\[\e[0m\]\[\e[00;36m\]\j\[\e[0m\]\[\e[00;32m\]}\[\e[0m\]\[\e[00;31m\]\h\[\e[0m\]\[\e[00;32m\][\[\e[0m\]\[\e[00;35m\]\w\[\e[0m\]\[\e[00;32m\]]\$\[\e[0m\]\[\e[00;37m\] \[\e[0m\]'
 shopt -s histappend
 shopt -s histverify
 HISTCONTROL=ignoreboth
@@ -42,8 +42,11 @@ alias hmesg='dmesg -Tx'
 alias nssh='ssh -q -o StrictHostKeyChecking=false -o UserKnownHostsFile=/dev/null'
 alias nscp='scp -o StrictHostKeyChecking=false -o UserKnownHostsFile=/dev/null'
 alias nrsync='rsync -e "ssh -o StrictHostKeyChecking=false -o UserKnownHostsFile=/dev/null"'
+
 ff() { find . -type f -iname '*'"$*"'*' -ls ; }
+
 fe() { find . -type f -iname '*'"${1:-}"'*' -exec ${2:-file} {} \;  ; }
+
 extract() {
   if [ -f $1 ] ; then
     case $1 in
@@ -61,21 +64,32 @@ extract() {
       *)           echo "'$1' error 666 cant handle archivetype" ;;
     esac
   else echo "'$1' is no file, wth" ; fi }
+
 maketar() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
+
 makezip() { zip -r "${1%%/}.zip" "$1" ; }
+
 #who cd s anyways
 up() {
   if [[ -z "$1" ]]; then count=1;
-   else count=$1; fi
+   else 
+     count=$1; 
+   fi
   local path i
   for (( i=0; i < ${count}; i++ )); do path+=../ ; done
-  cd "$path" }
+  cd "$path" ; }
+
 separator() { printf "%$(tput cols)s\n"|tr ' ' '='; }
-http_headers () { /usr/bin/curl -I -L $@ ; }
+
 mkdircd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
+
 whichl() { ls -l `which $1`; }
+
 parse_git_branch () { git name-rev HEAD 2> /dev/null | sed 's#HEAD\ \(.*\)# (git::\1)#'; }
+
 [[ -f ~/.bashrc.local ]] && source ~/.bashrc.local
+
 eval "$(rbenv init -)"
 alias g='git'
 alias v='vim'
+alias vag='vagrant'

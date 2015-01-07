@@ -7,3 +7,9 @@
 [submodule "vim/bundle/vim-sensible"]
 	path = vim/bundle/vim-sensible
 	url = git://github.com/tpope/vim-sensible.git
+[submodule "vim/bundle/bundle/ctrlp.vim"]
+	path = vim/bundle/bundle/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git
+[submodule "vim/bundle/ctrlp.vim"]
+	path = vim/bundle/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git

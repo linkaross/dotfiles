@@ -1,6 +1,6 @@
-source ~/git-repos/dotfiles/vim/autoload/pathogen.vim
+source ~/dotfiles/vim/autoload/pathogen.vim
 
-execute pathogen#infect('bundle/{}', '~/git-repos/dotfiles/vim/bundle/{}')
+execute pathogen#infect('bundle/{}', '~/dotfiles/vim/bundle/{}')
 
 set nocompatible
 
@@ -43,3 +43,12 @@ set statusline=%<%f\ %(\ [%M%R%H%Y]%)%=%-14.(%l,%c%V%)\ %P
 autocmd! bufwritepost .vimrc source %
 "
 let g:syntastic_puppet_puppetlint_args = '--no-80chars-check'
+
+let g:Powerline_symbols = 'fancy'
+set encoding=utf-8
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+let g:Powerline_mode_V="V·LINE"
+let g:Powerline_mode_cv="V·BLOCK"
+let g:Powerline_mode_S="S·LINE"
+let g:Powerline_mode_cs="S·BLOCK"
