@@ -7,13 +7,18 @@
 #        \__/                 \__/
 #
 # ~/.bashrc
-#
+# todo: ps1 chroot, moar fancy git prompt
 [[ $- != *i* ]] && return
 alias ls='ls --color=auto'
 PS1='`if [ $? = 0 ]; then echo "\[\033[01;32m\]:) ?$?"; else echo "\[\033[01;31m\]:( ?$?"; fi`\[\e[0m\] \[\e[00;32m\]n!\! \[\e[0m\]\[\e[00;33m\]@\t \[\e[0m\]\[\e[00;37m\]`parse_git_branch; `\n\[\e[0m\]\[\e[01;33m\]\u\[\e[0m\]\[\e[00;32m\]{\[\e[0m\]\[\e[00;36m\]\j\[\e[0m\]\[\e[00;32m\]}\[\e[0m\]\[\e[00;31m\]\h\[\e[0m\]\[\e[00;32m\][\[\e[0m\]\[\e[00;35m\]\w\[\e[0m\]\[\e[00;32m\]]\$\[\e[0m\]\[\e[00;37m\] \[\e[0m\]'
 shopt -s histappend
-shopt -s histreedit
 shopt -s histverify
+HISTCONTROL=ignoreboth
+HISTSIZE=999999
+unset HISTFILESIZE
+PROMPT_COMMAND='history -a'
+[[ -x /usr/bin/dircolors ]] && { test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)" ; } ;
+unset LESSOPEN
 # (v) (°,,,°) (v)
 set -o vi
 shopt -s checkwinsize
