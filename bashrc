@@ -85,11 +85,60 @@ mkdircd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
 
 whichl() { ls -l `which $1`; }
 
-parse_git_branch () { git name-rev HEAD 2> /dev/null | sed 's#HEAD\ \(.*\)# (git::\1)#'; }
-
 [[ -f ~/.bashrc.local ]] && source ~/.bashrc.local
 
 eval "$(rbenv init -)"
 alias g='git'
 alias v='vim'
 alias vag='vagrant'
+#RED=`\[\033[0;31m\]`
+#YELLOW=`\[\033[0;33m\]`
+#GREEN=`\[\033[0;32m\]`
+#BLUE=`\[\033[0;34m\]`
+#LIGHT_RED=`\[\033[1;31m\]`
+#LIGHT_GREEN=`\[\033[1;32m\]`
+#WHITE=`\[\033[1;37m\]`
+#LIGHT_GRAY=`\[\033[0;37m\]`
+#COLOR_NONE=`\[\e[0m\]`
+  
+is_git_repository() {
+ git branch > /dev/null 2>&1
+}
+
+ parse_git_branch() {
+# Only display git info if we're inside a git repository.
+is_git_repository || return 1
+# Capture the output of the "git status" command.
+git_status="$(git status 2> /dev/null)"
+ 
+# Set color based on clean/staged/dirty.
+if [[ ${git_status} =~ "working directory clean" ]]; then
+  state="clean"
+elif [[ ${git_status} =~ "Changes to be committed" ]]; then
+  state="ready"
+else
+  state="dirty"
+fi
+# Set arrow icon based on status against remote.
+remote_pattern="# Your branch is (.*) of"
+if [[ ${git_status} =~ ${remote_pattern} ]]; then
+  if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
+    remote="ahead"
+  else
+    remote="sync"
+  fi
+fi
+diverge_pattern="# Your branch and (.*) have diverged"
+if [[ ${git_status} =~ ${diverge_pattern} ]]; then
+  remote="diverg"
+fi
+# Get the name of the branch.
+branch_pattern="^# On branch ([^${IFS}]*)"
+if [[ ${git_status} =~ ${branch_pattern} ]]; then
+  branch=${BASH_REMATCH[1]}
+fi
+ 
+# Display the prompt.
+echo "(git:${state}|${branch}|${remote})"
+}
+ 
