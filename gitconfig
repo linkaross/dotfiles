@@ -66,15 +66,34 @@
 
   cb = rev-parse --abbrev-ref HEAD
   currentbranch = rev-parse --abbrev-ref HEAD
+  bra = branch
+  br = branch
 
   co=checkout
+  chec = checkout
+  checko = checkout
+  checkou = checkout
+
+  cl = clone
+  clo = clone
+  clon = clone
 
   s=status
   st = status
   sta = status
+  stat = status
+  statu = status
 
   d=diff
   di = diff
+  dif = diff
+
+  a = add
+  ad = add
+
+  i = init
+  in = init
+  ini = init
 
 [include]
   path = ~/.gitconfig.local
