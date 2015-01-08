@@ -57,3 +57,24 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+set showtabline=2
+map <C-m> :tabnext<CR>
+
+:highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
+
+:autocmd InsertLeave * redraw!
+
+" Show trailing whitespace:
+:match ExtraWhitespace /\s\+$/
+
+" Show trailing whitespace and spaces before a tab:
+:match ExtraWhitespace /\s\+$\| \+\ze\t/
+
+" Show tabs that are not at the start of a line:
+:match ExtraWhitespace /[^\t]\zs\t\+/
+
+" Show spaces used for indenting (so you use only tabs for indenting).
+:match ExtraWhitespace /^\t*\zs \+/
+
+
