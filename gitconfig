@@ -14,49 +14,67 @@
 	#'current'  : Push the current branch
 
 [merge]
-tool = vimdiff
-stat = true
-log = true
-ff = true
-conflictStyle = diff3
-defaultToUpstream = true
-verbosity = 3
+  tool = vimdiff
+  stat = true
+  log = true
+  ff = true
+  conflictStyle = diff3
+  defaultToUpstream = true
+  verbosity = 3
+
 [mergetool]
-prompt = false
+  prompt = false
+
 [grep]
-linenumber = true
+  linenumber = true
+
 [format]
-signoff = true
+  signoff = true
+
 [core]
-whitespace = -trailing-space,-indent-with-non-tab,-tab-in-indent
-editor = vim
-pager = most
+  whitespace = -trailing-space,-indent-with-non-tab,-tab-in-indent
+  editor = vim
+  pager = most
 
 [alias]
-submod = submodule
-changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
-short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
-changelog = log --pretty=format:\" * %s\"
-shortnocolor = log --pretty= format:\"%h %cr %cn %s\"
+  sm = submodule
+  submod = submodule
 
- last = diff HEAD^
-unstage = reset HEAD
-uncommit = reset --soft HEAD^
-filelog = log -u
-pul = pull
-pl = pull
-p = pull
-puhs = push
-pus = push
-ps = push
-ci = commit
-cm = commit -m
-currentbranch = rev-parse --abbrev-ref HEAD
+  changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+  short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+  changelog = log --pretty=format:\" * %s\"
+  shortnocolor = log --pretty= format:\"%h %cr %cn %s\"
+  filelog = log -u
 
- co=checkout
-s=status
-d=diff
+  last = diff HEAD^
+  unstage = reset HEAD
+  uncommit = reset --soft HEAD^
 
+  pul = pull
+  pl = pull
+  p = pull
+
+  puhs = push
+  pus = push
+  ps = push
+
+  c = commit
+  ci = commit
+  cm = commit -m
+  ca = commit -a
+  cam = commit -am
+
+  cb = rev-parse --abbrev-ref HEAD
+  currentbranch = rev-parse --abbrev-ref HEAD
+
+  co=checkout
+
+  s=status
+  st = status
+  sta = status
+
+  d=diff
+  di = diff
 
 [include]
-path = ~/.gitconfig.local
+  path = ~/.gitconfig.local
