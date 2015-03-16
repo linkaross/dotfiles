@@ -83,12 +83,12 @@ bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+0 move container to workspace 0
 
 ###############
 # COLORS
 ###############           border     backgrnd   text
-client.focused            #006600    #33CC33    #000000
+client.focused            #006600    #009900    #000000
 client.focused_inactive   #336600    #00CC00    #000000
 client.unfocused          #003300    #000099    #FFFFCC
 client.urgent             #FF0000    #8C5665    #FF0000
