@@ -8,9 +8,11 @@ bindsym $mod+Shift+q kill
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
-
 # app launcher
 bindsym $mod+d exec synapse
+# screenshot
+bindsym $mod+s exec shutter -f
+
 
 ###############
 # MOVING
@@ -127,4 +129,12 @@ bar {
         status_command i3status
 }
 
+###############
 #pseudo autostart section :)
+###############
+# network manager
+nm-applet &
+# screenshot manager
+shutter &
+# clipoard manager
+clipit &
