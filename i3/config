@@ -133,3 +133,5 @@ exec clipit &
 # background
 exec xsetroot -solid "#000000" &
 exec nitrogen --restore &
+# seahorse
+exec --no-startup-id dbus-send --session --print-reply=literal --dest=org.gnome.SessionManager "/org/gnome/SessionManager" org.gnome.SessionManager.RegisterClient "string:i3" "string:$DESKTOP_AUTOSTART_ID"

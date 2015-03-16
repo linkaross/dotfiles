@@ -102,3 +102,5 @@ GIT_PROMPT_ONLY_IN_REPO=1
 GIT_PROMPT_THEME=Solarized
 source ~/dotfiles/bash-git-prompt/gitprompt.sh
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+
+export $( gnome-keyring-daemon -s )
