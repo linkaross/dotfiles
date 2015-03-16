@@ -10,7 +10,7 @@
 # todo: ps1 chroot, moar fancy git prompt
 [[ $- != *i* ]] && return
 alias ls='ls --color=auto'
-PS1='`if [ $? = 0 ]; then echo "\[\033[01;32m\]:) ?$?"; else echo "\[\033[01;31m\]:( ?$?"; fi`\[\e[0m\] \[\e[00;32m\]n!\! \[\e[0m\]\[\e[00;33m\]@\t \[\e[0m\]\[\e[00;37m\]` parse_git_branch `\n\[\e[0m\]\[\e[01;33m\]\u\[\e[0m\]\[\e[00;32m\]{\[\e[0m\]\[\e[00;36m\]\j\[\e[0m\]\[\e[00;32m\]}\[\e[0m\]\[\e[00;31m\]\h\[\e[0m\]\[\e[00;32m\][\[\e[0m\]\[\e[00;35m\]\w\[\e[0m\]\[\e[00;32m\]]\$\[\e[0m\]\[\e[00;37m\] \[\e[0m\]'
+PS1='`if [ $? = 0 ]; then echo "\[\033[01;32m\]:) ?$?"; else echo "\[\033[01;31m\]:( ?$?"; fi`\[\e[0m\] \[\e[00;32m\]n!\! \[\e[0m\]\[\e[00;33m\]@\t \[\e[0m\]\[\e[00;37m\]\n\[\e[0m\]\[\e[01;33m\]\u\[\e[0m\]\[\e[00;32m\]{\[\e[0m\]\[\e[00;36m\]\j\[\e[0m\]\[\e[00;32m\]}\[\e[0m\]\[\e[00;31m\]\h\[\e[0m\]\[\e[00;32m\][\[\e[0m\]\[\e[00;35m\]\w\[\e[0m\]\[\e[00;32m\]]\$\[\e[0m\]\[\e[00;37m\] \[\e[0m\]'
 shopt -s histappend
 shopt -s histverify
 HISTCONTROL=ignoreboth
@@ -92,41 +92,13 @@ eval "$(rbenv init -)"
 alias g='git'
 alias v='vim'
 alias vag='vagrant'
-  
-is_git_repository() {
- git branch > /dev/null 2>&1
-}
 
-parse_git_branch() {
-is_git_repository || return 1
-
-git_status="$(git status 2> /dev/null)"
-if [[ ${git_status} =~ "working directory clean" ]]; then
-  state="clean"
-elif [[ ${git_status} =~ "Changes to be committed" ]]; then
-  state="ready"
-else
-  state="dirty"
-fi
-remote_pattern="# Your branch is (.*) of"
-if [[ ${git_status} =~ ${remote_pattern} ]]; then
-  if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
-    remote="ahead"
-  else
-    remote="sync"
+function prompt_callback {
+  if [ `jobs | wc -l` -ne 0 ]; then
+    echo -n " jobs:\j"
   fi
-fi
-
-diverge_pattern="# Your branch and (.*) have diverged"
-if [[ ${git_status} =~ ${diverge_pattern} ]]; then
-  remote="diverg"
-fi
-
-branch_pattern="^# On branch ([^${IFS}]*)"
-if [[ ${git_status} =~ ${branch_pattern} ]]; then
-  branch=${BASH_REMATCH[1]}
-fi
- 
-echo "(git:${state}|${branch}|${remote})"
 }
- 
+GIT_PROMPT_ONLY_IN_REPO=1
+GIT_PROMPT_THEME=Solarized
+source ~/dotfiles/bash-git-prompt/gitprompt.sh
+export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
