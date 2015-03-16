@@ -1,6 +1,6 @@
 # i3 config file (v4)
 set $mod Mod4
-font pango:DejaVu Sans Mono 8
+font pango:Terminus Sans Mono 11
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 # kill focused window
@@ -11,7 +11,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 # app launcher
 bindsym $mod+d exec synapse
 # screenshot
-bindsym $mod+s exec shutter -f
+bindsym $mod+t exec shutter -f
 
 
 ###############
@@ -58,15 +58,6 @@ bindsym $mod+a focus parent
 ###############
 # WORKSPACES
 ###############
-workspace 1 nova
-workspace 2 leva
-workspace 3 rahma
-worksapce 4 grada
-workspace 5 thor
-workspace 6 valdi
-workspace 7 nikki
-workspace 8 drahk
-workspace 9 vorlon
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -77,7 +68,7 @@ bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+0 workspace 0
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
@@ -93,9 +84,9 @@ bindsym $mod+Shift+0 move container to workspace 10
 ###############
 # COLORS
 ###############           border     backgrnd   text
-client.focused            #1793D0    #1793D0    #FFFFFF
-client.focused_inactive   #333333    #333333    #999999
-client.unfocused          #333333    #333333    #999999
+client.focused            #006600    #33CC33    #000000
+client.focused_inactive   #336600    #00CC00    #000000
+client.unfocused          #003300    #000099    #FFFFCC
 client.urgent             #FF0000    #8C5665    #FF0000
 
 ###############
@@ -132,9 +123,13 @@ bar {
 ###############
 #pseudo autostart section :)
 ###############
+exec synapse -s
 # network manager
-nm-applet &
+exec nm-applet &
 # screenshot manager
-shutter &
+exec shutter --min_at_startup &
 # clipoard manager
-clipit &
+exec clipit &
+# background
+exec xsetroot -solid "#000000" &
+exec nitrogen --restore &
