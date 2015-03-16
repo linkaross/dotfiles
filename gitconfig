@@ -6,6 +6,9 @@
 	status = true
 	ui = always
 
+[pull]
+  default = current
+
 [push]
 	default = current
 	#'nothing'  : Do not push anything
@@ -34,6 +37,7 @@
 [core]
   whitespace = -trailing-space,-indent-with-non-tab,-tab-in-indent
   editor = vim
+	excludesfile = /home/oz/.gitignore.local
 
 [alias]
   sm = submodule
