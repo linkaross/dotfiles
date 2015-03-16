@@ -12,7 +12,11 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+d exec synapse
 # screenshot
 bindsym $mod+t exec shutter -f
-
+#volume
+bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume 0 -- '-5%'
+bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume 0 -- '+5%'
+#lock
+bindsym Control+$mod+l exec mate-screensaver-command -l
 
 ###############
 # MOVING
@@ -135,3 +139,9 @@ exec xsetroot -solid "#000000" &
 exec nitrogen --restore &
 # seahorse
 exec --no-startup-id dbus-send --session --print-reply=literal --dest=org.gnome.SessionManager "/org/gnome/SessionManager" org.gnome.SessionManager.RegisterClient "string:i3" "string:$DESKTOP_AUTOSTART_ID"
+# chat
+exec pidgin &
+exec hexchat --minimize=2
+# screensaver
+exec xautolock -time 1 -locker ~/.lockdown &
+exec mate-screensaver &
