@@ -22,3 +22,12 @@
 [submodule "bash-git-prompt"]
 	path = bash-git-prompt
 	url = git@github.com:magicmonty/bash-git-prompt.git
+[submodule "vim/bundle/vim-rake"]
+	path = vim/bundle/vim-rake
+	url = git://github.com/tpope/vim-rake.git
+[submodule "vim/bundle/vim-projectionist"]
+	path = vim/bundle/vim-projectionist
+	url = git://github.com/tpope/vim-projectionist.git
+[submodule "vim/bundle/vim-dispatch"]
+	path = vim/bundle/vim-dispatch
+	url = git://github.com/tpope/vim-dispatch.git
