@@ -134,9 +134,6 @@ exec nm-applet &
 exec shutter --min_at_startup &
 # clipoard manager
 exec clipit &
-# background
-exec xsetroot -solid "#000000" &
-exec nitrogen --restore &
 # seahorse
 exec --no-startup-id dbus-send --session --print-reply=literal --dest=org.gnome.SessionManager "/org/gnome/SessionManager" org.gnome.SessionManager.RegisterClient "string:i3" "string:$DESKTOP_AUTOSTART_ID"
 # chat
@@ -145,3 +142,6 @@ exec hexchat --minimize=2
 # screensaver
 exec xautolock -time 1 -locker ~/.lockdown &
 exec mate-screensaver &
+# background
+exec xsetroot -solid "#000000" &
+exec $(sleep 2; nitrogen --restore &)
